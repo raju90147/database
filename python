@@ -1,0 +1,36 @@
+
+# connecting to my sql server database
+
+import mysql.connector as mc
+
+# connection creation
+conn = mc.connect(host='127.0.0.1', user='root', passwd='Raju.b,443')
+print(conn)
+
+#create cursor object
+
+cur = conn.cursor()
+print(cur)
+
+cur.execute('show databases')
+
+for i in cur:
+    print(i)
+    
+# create database
+
+cur.execute('create database perfor')
+
+cur.execute("show tables")
+
+for x in cur:
+    print(x)    
+
+
+cur.execute('use employee') # to work on this database
+cur.execute('''create table emp_perform (id int(10), name varchar(30), department varchar(10), performance varchar(20))''') #create table
+cur.execute('''insert into emp_perform values (23, 'raju', 'HR', 'HIGH')''') # intert values into table
+cur.execute('''select name from emp_perform''') # retrieve particular column data
+conn.commit() #to save changes  
+conn.close()    
+
